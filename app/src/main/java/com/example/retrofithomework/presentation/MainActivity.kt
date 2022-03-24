@@ -2,6 +2,7 @@ package com.example.retrofithomework.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.SearchView
 import com.example.retrofithomework.R
 import com.example.retrofithomework.presentation.recycler.BaseAdapter
 import com.example.retrofithomework.presentation.viewmodel.NewsViewModel
@@ -20,9 +21,24 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        initView()
-        initObserver()
+
         searchNews()
+    }
+
+    private fun searchNews() {
+        search_bar.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                textDisplayNumberOfResult.text = query
+                initView()
+                initObserver()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+
+        })
     }
 
     private fun initView() {
@@ -31,9 +47,5 @@ class MainActivity : AppCompatActivity() {
 
     private fun initObserver() {
 
-    }
-
-    private fun searchNews() {
-        //search_bar.
     }
 }
