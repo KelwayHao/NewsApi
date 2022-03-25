@@ -6,17 +6,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.retrofithomework.domain.models.BaseItem
 import com.example.retrofithomework.domain.models.Date
 import com.example.retrofithomework.domain.models.News
+import com.example.retrofithomework.presentation.recycler.clicklisteners.OnClickShareListener
 import com.example.retrofithomework.presentation.recycler.viewholders.DateSectionViewHolder
 import com.example.retrofithomework.presentation.recycler.viewholders.NewsSectionViewHolder
 
-class BaseAdapter : RecyclerView.Adapter<BaseViewHolder>() {
+class BaseAdapter(
+    private val clickShare: OnClickShareListener
+) : RecyclerView.Adapter<BaseViewHolder>() {
 
     private var items: List<BaseItem> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
-        return when(viewType) {
+        return when (viewType) {
             DateSectionViewHolder.VIEW_TYPE -> DateSectionViewHolder.newInstance(parent)
-            NewsSectionViewHolder.VIEW_TYPE -> NewsSectionViewHolder.newInstance(parent)
+            NewsSectionViewHolder.VIEW_TYPE -> NewsSectionViewHolder.newInstance(parent, clickShare)
             else -> throw IllegalStateException("Wrong view holder type")
         }
     }
@@ -26,7 +29,7 @@ class BaseAdapter : RecyclerView.Adapter<BaseViewHolder>() {
     }
 
     override fun getItemViewType(position: Int): Int {
-        return when(items[position]) {
+        return when (items[position]) {
             is Date -> DateSectionViewHolder.VIEW_TYPE
             is News -> NewsSectionViewHolder.VIEW_TYPE
             else -> throw IllegalStateException("Wrong view view type")
