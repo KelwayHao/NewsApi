@@ -37,7 +37,7 @@ class NewsSectionViewHolder(itemView: View, private val clickShare: OnClickShare
             itemView.textTitleNews.text = title
             itemView.descriptionNews.text = description
             itemView.textAuthorNews.text =
-                "Author $author" //TODO Как взять с ресурсов "Автор"?
+                "${itemView.context.getString(R.string.author)} $author"
             itemView.imageShare.setOnClickListener {
                 clickShare.sendNews(articleUrl)
             }
