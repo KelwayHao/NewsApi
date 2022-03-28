@@ -66,10 +66,10 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun initObserver() {
-        viewModel.news.observe(this) { mapList ->
+        viewModel.news.observe(this) { listNews ->
             textDisplayNumberOfResult.text =
-                "${getString(R.string.numbers_of_result)} ${mapList.keys.first()}"
-            adapter.submitList(mapList.values.first())
+                "${getString(R.string.numbers_of_result)} ${listNews.quantityNews}"
+            adapter.submitList(listNews.listNews)
         }
     }
 }

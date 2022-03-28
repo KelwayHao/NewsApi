@@ -6,11 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.retrofithomework.domain.interactor.NewsInteractor
 import com.example.retrofithomework.domain.models.BaseItem
+import com.example.retrofithomework.domain.models.NewsInfo
 import kotlinx.coroutines.launch
 
 class NewsViewModel(private val newsInteractor: NewsInteractor): ViewModel() {
-    private val _news = MutableLiveData<Map<String, List<BaseItem>>>()
-    val news: LiveData<Map<String, List<BaseItem>>> get() = _news
+    private val _news = MutableLiveData<NewsInfo>()
+    val news: LiveData<NewsInfo> get() = _news
 
     fun setWord(word: String){
         loadData(word)
