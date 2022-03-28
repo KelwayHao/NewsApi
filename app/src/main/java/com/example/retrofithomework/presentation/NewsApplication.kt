@@ -6,7 +6,7 @@ import com.example.retrofithomework.domain.di.modelModule
 import com.example.retrofithomework.presentation.di.viewModelModule
 import org.koin.core.context.startKoin
 
-class KoinApplication: Application() {
+class NewsApplication: Application() {
 
     override fun onCreate() {
         super.onCreate()
