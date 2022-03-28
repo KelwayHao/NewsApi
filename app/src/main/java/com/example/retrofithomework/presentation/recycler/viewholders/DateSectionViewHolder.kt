@@ -19,7 +19,7 @@ class DateSectionViewHolder(itemView: View): BaseViewHolder(itemView) {
 
     override fun bindItem(item: BaseItem) {
         (item as Date).apply {
-            itemView.textDate.text = item.dateNews
+            itemView.textDate.text = item.dateNews.replace("-", ".")
         }
     }
 }
