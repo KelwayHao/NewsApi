@@ -8,13 +8,13 @@ data class ArticleResponse(
     @SerializedName("author")
     val author: String?,
     @SerializedName("title")
-    val title: String?,
+    val title: String,
     @SerializedName("description")
-    val description: String?,
+    val description: String,
     @SerializedName("url")
     val articleUrl: String?,
     @SerializedName("urlToImage")
-    val previewUrlToImage: String?,
+    val previewUrlToImage: String,
     @SerializedName("publishedAt")
     val publishedAt: String,
     @SerializedName("content")

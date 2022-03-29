@@ -6,12 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.retrofithomework.domain.models.BaseItem
 import com.example.retrofithomework.domain.models.Date
 import com.example.retrofithomework.domain.models.News
-import com.example.retrofithomework.presentation.recycler.clicklisteners.OnClickShareListener
+import com.example.retrofithomework.presentation.recycler.clicklisteners.OnItemClickListener
 import com.example.retrofithomework.presentation.recycler.viewholders.DateSectionViewHolder
 import com.example.retrofithomework.presentation.recycler.viewholders.NewsSectionViewHolder
 
 class BaseAdapter(
-    private val clickShare: OnClickShareListener
+    private val clickShare: OnItemClickListener
 ) : RecyclerView.Adapter<BaseViewHolder>() {
 
     private var items: List<BaseItem> = emptyList()
