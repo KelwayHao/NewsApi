@@ -1,15 +1,15 @@
 package com.example.retrofithomework.presentation
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
-import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.retrofithomework.R
 import com.example.retrofithomework.presentation.recycler.BaseAdapter
-import com.example.retrofithomework.presentation.recycler.clicklisteners.OnClickShareListener
+import com.example.retrofithomework.presentation.recycler.clicklisteners.OnItemClickListener
 import com.example.retrofithomework.presentation.viewmodel.NewsViewModel
+import com.example.retrofithomework.utils.extensions.createIntentForShareNews
 import com.example.retrofithomework.utils.extensions.hideKeyboard
+import com.example.retrofithomework.utils.extensions.setOnQueryListener
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -19,14 +19,13 @@ class MainActivity : AppCompatActivity() {
     private val adapter by lazy { BaseAdapter(shareNews) }
 
     private val shareNews by lazy {
-        object : OnClickShareListener {
-            override fun sendNews(urlNews: String?) {
-                val intent = Intent(Intent.ACTION_SEND).apply {
-                    type = "text/plain"
-                    putExtra(Intent.EXTRA_SUBJECT, "News")
-                    putExtra(Intent.EXTRA_TEXT, urlNews)
-                }
-                startActivity(Intent.createChooser(intent, "Share"))
+        object : OnItemClickListener {
+            override fun onShareButtonClickListener(urlNews: String?) {
+                createIntentForShareNews(
+                    urlNews,
+                    getString(R.string.news),
+                    getString(R.string.share)
+                )
             }
         }
     }
@@ -40,24 +39,16 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
 
         searchNews()
+        initView()
+        initObserver()
     }
 
     private fun searchNews() {
-        search_bar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                if (query != null) {
-                    viewModel.setWord(query)
-                    initView()
-                    initObserver()
-                    hideKeyboard(search_bar)
-                }
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return false
-            }
-        })
+        searchBar.setOnQueryListener { stringQuery ->
+            viewModel.setWord(stringQuery.toString())
+            hideKeyboard(searchBar)
+            return@setOnQueryListener true
+        }
     }
 
     private fun initView() {
@@ -66,10 +57,10 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun initObserver() {
-        viewModel.news.observe(this) { mapList ->
+        viewModel.news.observe(this) { listNews ->
             textDisplayNumberOfResult.text =
-                "${getString(R.string.numbers_of_result)} ${mapList.keys.first()}"
-            adapter.submitList(mapList.values.first())
+                "${getString(R.string.numbers_of_result, listNews.amountNews)} "
+            adapter.submitList(listNews.listNews)
         }
     }
 }

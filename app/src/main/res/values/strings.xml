@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">RetrofitHomework</string>
-    <string name="numbers_of_result">Number of results:</string>
+    <string name="numbers_of_result">Number of results: %s</string>
     <string name="author">Author:</string>
+    <string name="share">Share</string>
+    <string name="news">News</string>
 </resources>

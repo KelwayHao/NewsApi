@@ -9,7 +9,7 @@ import com.example.retrofithomework.domain.models.Date
 import com.example.retrofithomework.presentation.recycler.BaseViewHolder
 import kotlinx.android.synthetic.main.section_date.view.*
 
-class DateSectionViewHolder(itemView: View): BaseViewHolder(itemView) {
+class DateSectionViewHolder(itemView: View) : BaseViewHolder(itemView) {
     companion object {
         const val VIEW_TYPE = 1
         fun newInstance(parent: ViewGroup) = DateSectionViewHolder(
@@ -19,7 +19,7 @@ class DateSectionViewHolder(itemView: View): BaseViewHolder(itemView) {
 
     override fun bindItem(item: BaseItem) {
         (item as Date).apply {
-            itemView.textDate.text = item.dateNews
+            itemView.textDate.text = item.dateNews.replace("-", ".")
         }
     }
 }
