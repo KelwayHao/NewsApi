@@ -32,9 +32,7 @@ class NewsSectionViewHolder(itemView: View, private val clickShare: OnItemClickL
             itemView.textAuthorNews.text =
                 "${itemView.context.getString(R.string.author)} $author"
             itemView.imageShare.setOnClickListener {
-                if (articleUrl != null) {
-                    clickShare.onShareButtonClickListener(articleUrl)
-                }
+                articleUrl?.let { url -> clickShare.onShareButtonClickListener(url) }
             }
         }
     }
