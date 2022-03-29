@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     private val shareNews by lazy {
         object : OnItemClickListener {
-            override fun onShareButtonClickListener(urlNews: String?) {
+            override fun onShareButtonClickListener(urlNews: String) {
                 createIntentForShareNews(
                     urlNews,
                     getString(R.string.news),
