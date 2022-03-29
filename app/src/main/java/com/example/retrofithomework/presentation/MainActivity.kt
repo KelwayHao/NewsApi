@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
     private fun initObserver() {
         viewModel.news.observe(this) { listNews ->
             textDisplayNumberOfResult.text =
-                "${getString(R.string.numbers_of_result, listNews.quantityNews)} "
+                "${getString(R.string.numbers_of_result, listNews.amountNews)} "
             adapter.submitList(listNews.listNews)
         }
     }

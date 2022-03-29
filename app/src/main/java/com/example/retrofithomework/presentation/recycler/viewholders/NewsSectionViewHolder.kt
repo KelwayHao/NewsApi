@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import com.example.retrofithomework.R
 import com.example.retrofithomework.domain.models.BaseItem
 import com.example.retrofithomework.domain.models.News
@@ -27,16 +26,15 @@ class NewsSectionViewHolder(itemView: View, private val clickShare: OnItemClickL
     override fun bindItem(item: BaseItem) {
         (item as News).apply {
 
-            /*Glide.with(itemView.context)
-                .load(previewUrlToImage)
-                .into(itemView.imageNews)*/
             itemView.imageNews.setImageByUrl(previewUrlToImage)
             itemView.textTitleNews.text = title
             itemView.descriptionNews.text = description
             itemView.textAuthorNews.text =
                 "${itemView.context.getString(R.string.author)} $author"
             itemView.imageShare.setOnClickListener {
-                clickShare.onShareButtonClickListener(articleUrl)
+                if (articleUrl != null) {
+                    clickShare.onShareButtonClickListener(articleUrl)
+                }
             }
         }
     }

@@ -1,6 +1,5 @@
 package com.example.retrofithomework.domain.di
 
-import com.example.retrofithomework.data.NewsApi
 import com.example.retrofithomework.data.NewsRepositoryImpl
 import com.example.retrofithomework.data.retrofit.RetrofitClient
 import com.example.retrofithomework.domain.interactor.NewsInteractor

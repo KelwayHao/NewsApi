@@ -7,18 +7,13 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.SearchView
-import androidx.core.content.ContextCompat.startActivity
 import com.bumptech.glide.Glide
-import com.example.retrofithomework.R
 import com.example.retrofithomework.data.models.ArticleResponse
 import com.example.retrofithomework.data.models.NewsResponse
 import com.example.retrofithomework.domain.models.BaseItem
 import com.example.retrofithomework.domain.models.Date
 import com.example.retrofithomework.domain.models.News
 import com.example.retrofithomework.domain.models.NewsInfo
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
-import kotlinx.android.synthetic.main.section_news.view.*
 
 fun List<ArticleResponse>.toBaseItems(): List<BaseItem> {
     val listBaseItem = mutableListOf<BaseItem>()
@@ -77,14 +72,18 @@ fun ImageView.setImageByUrl(url: String) {
         .into(this)
 }
 
-fun Context.createIntentForShareNews(urlNews: String?, getSubject: String, getTitleShareMenu:String){
+fun Context.createIntentForShareNews(
+    urlNews: String?,
+    getSubject: String,
+    getTitleShareMenu: String
+) {
     val intent = Intent(Intent.ACTION_SEND).apply {
         type = "text/plain"
         putExtra(Intent.EXTRA_SUBJECT, getSubject)
         putExtra(Intent.EXTRA_TEXT, urlNews)
     }
 
-    this.startActivity(Intent.createChooser(intent, getTitleShareMenu))
+    startActivity(Intent.createChooser(intent, getTitleShareMenu))
 }
 
 fun SearchView.setOnQueryListener(submit: (String?) -> Boolean) {
@@ -98,20 +97,3 @@ fun SearchView.setOnQueryListener(submit: (String?) -> Boolean) {
         }
     })
 }
-
-
-/*setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                if (query != null) {
-                    viewModel.setWord(query)
-                    initView()
-                    initObserver()
-                    hideKeyboard(search_bar)
-                }
-                return true
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                return false
-            }
-        })*/

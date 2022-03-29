@@ -7,13 +7,13 @@ data class Date(
 ) : BaseItem()
 
 data class News(
-    val author: String,
+    val author: String?,
     val title: String,
     val description: String,
-    val articleUrl: String,
+    val articleUrl: String?,
     val previewUrlToImage: String,
-    val content: String,
-    val idNewsChannel: String,
-    val nameNewsChannel: String
+    val content: String?,
+    val idNewsChannel: String?,
+    val nameNewsChannel: String?
 ) : BaseItem()
 
