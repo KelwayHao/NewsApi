@@ -4,6 +4,7 @@ import com.example.retrofithomework.data.NewsApi
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
@@ -15,8 +16,9 @@ object RetrofitClient {
         .create()
 
     private fun getClient() = Retrofit.Builder()
-        .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create(gson))
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+        .baseUrl(BASE_URL)
         .build()
 
     fun getNewsApi(): NewsApi = getClient().create(NewsApi::class.java)
