@@ -16,9 +16,9 @@ object RetrofitClient {
         .create()
 
     private fun getClient() = Retrofit.Builder()
+        .baseUrl(BASE_URL)
         .addConverterFactory(GsonConverterFactory.create(gson))
         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        .baseUrl(BASE_URL)
         .build()
 
     fun getNewsApi(): NewsApi = getClient().create(NewsApi::class.java)

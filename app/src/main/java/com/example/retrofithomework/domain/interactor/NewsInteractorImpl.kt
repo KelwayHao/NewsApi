@@ -9,7 +9,6 @@ import io.reactivex.Single
 class NewsInteractorImpl(private val repository: NewsRepository) : NewsInteractor {
     override fun getNews(searchWord: String): Single<NewsInfo> {
         return repository.getNewsResponse(searchWord).map {
-            Log.e("Error", it.totalResults.toString())
             NewsInfo(
                 it.totalResults.toString(),
                 it.article.toBaseItems()

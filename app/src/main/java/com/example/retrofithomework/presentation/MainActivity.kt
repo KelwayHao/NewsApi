@@ -2,6 +2,7 @@ package com.example.retrofithomework.presentation
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import com.example.retrofithomework.R
 import com.example.retrofithomework.presentation.recycler.BaseAdapter
@@ -46,6 +47,7 @@ class MainActivity : AppCompatActivity() {
     private fun searchNews() {
         searchBar.setOnQueryListener { stringQuery ->
             viewModel.setWord(stringQuery.toString())
+            circularProgressBar.visibility = ProgressBar.VISIBLE
             hideKeyboard(searchBar)
             return@setOnQueryListener true
         }
@@ -58,6 +60,7 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun initObserver() {
         viewModel.news.observe(this) { listNews ->
+            circularProgressBar.visibility = ProgressBar.INVISIBLE
             textDisplayNumberOfResult.text =
                 "${getString(R.string.numbers_of_result, listNews.amountNews)} "
             adapter.submitList(listNews.listNews)
