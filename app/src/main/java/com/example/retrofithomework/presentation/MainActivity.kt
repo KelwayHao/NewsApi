@@ -2,7 +2,9 @@ package com.example.retrofithomework.presentation
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
 import android.widget.ProgressBar
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.example.retrofithomework.R
 import com.example.retrofithomework.presentation.recycler.BaseAdapter
