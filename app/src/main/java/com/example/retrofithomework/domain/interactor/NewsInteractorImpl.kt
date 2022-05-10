@@ -1,6 +1,5 @@
 package com.example.retrofithomework.domain.interactor
 
-import android.util.Log
 import com.example.retrofithomework.domain.models.NewsInfo
 import com.example.retrofithomework.domain.repository.NewsRepository
 import com.example.retrofithomework.utils.extensions.toBaseItems

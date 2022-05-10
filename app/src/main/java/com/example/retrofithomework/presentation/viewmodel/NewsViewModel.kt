@@ -25,4 +25,19 @@ class NewsViewModel(private val newsInteractor: NewsInteractor) : ViewModel() {
                 { it.printStackTrace() }
             )
     }
+
+    fun setWordSplashScreen(word: String, repeatTimes: Long, delayTime: Long) {
+        loadDataSplashScreen(word, repeatTimes, delayTime)
+    }
+
+    private fun loadDataSplashScreen(word: String, repeatTimes: Long, delayTime: Long) {
+        val resultSplashScreen = newsInteractor.getNews(word)
+            .repeat(repeatTimes)
+            .delay(delayTime, TimeUnit.SECONDS)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { _news.postValue(it) },
+                { it.printStackTrace() }
+            )
+    }
 }

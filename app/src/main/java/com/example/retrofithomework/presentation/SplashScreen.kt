@@ -10,10 +10,6 @@ class SplashScreen : AppCompatActivity() {
 
     private val viewModel: NewsViewModel by viewModel()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onStart() {
         super.onStart()
         searchNews()
@@ -21,7 +17,7 @@ class SplashScreen : AppCompatActivity() {
     }
 
     private fun searchNews() {
-        viewModel.setWord("Android")
+        viewModel.setWordSplashScreen("Android",3L, 4L)
     }
 
     private fun initObserver() {

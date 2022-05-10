@@ -59,7 +59,6 @@ class MainActivity : AppCompatActivity() {
         recyclerDate.adapter = adapter
     }
 
-    @SuppressLint("SetTextI18n")
     private fun initObserver() {
         viewModel.news.observe(this) { listNews ->
             circularProgressBar.visibility = ProgressBar.INVISIBLE
