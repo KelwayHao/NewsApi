@@ -23,6 +23,7 @@ class SplashScreen : AppCompatActivity() {
     private fun initObserver() {
         viewModel.news.observe(this) { listNews ->
             intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("Android", listNews.amountNews)
             startActivity(intent)
             finish()
         }

@@ -7,6 +7,7 @@ import android.widget.ProgressBar
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.example.retrofithomework.R
+import com.example.retrofithomework.domain.models.NewsInfo
 import com.example.retrofithomework.presentation.recycler.BaseAdapter
 import com.example.retrofithomework.presentation.recycler.clicklisteners.OnItemClickListener
 import com.example.retrofithomework.presentation.viewmodel.NewsViewModel
@@ -41,6 +42,10 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
+        val intentAmount = intent.getStringExtra("Android")
+        textDisplayNumberOfResult.text =
+            "${getString(R.string.numbers_of_result, intentAmount)} "
+        
         searchNews()
         initView()
         initObserver()
