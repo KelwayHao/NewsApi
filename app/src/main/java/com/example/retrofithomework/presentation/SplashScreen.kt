@@ -1,10 +1,16 @@
 package com.example.retrofithomework.presentation
 
+import android.app.DownloadManager
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import com.example.retrofithomework.R
+import com.example.retrofithomework.domain.models.NewsInfo
 import com.example.retrofithomework.presentation.viewmodel.NewsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
 class SplashScreen : AppCompatActivity() {
 
@@ -21,13 +27,11 @@ class SplashScreen : AppCompatActivity() {
     }
 
     private fun initObserver() {
-        viewModel.news.observe(this) { listNews ->
+        viewModel.news.observe(this, ) { listNews ->
             intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("Android", listNews.amountNews)
+            intent.putExtra("Android", listNews)
             startActivity(intent)
             finish()
         }
     }
-
-
 }

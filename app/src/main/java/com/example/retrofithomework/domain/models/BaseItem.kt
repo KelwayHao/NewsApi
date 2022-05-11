@@ -1,11 +1,16 @@
 package com.example.retrofithomework.domain.models
 
-sealed class BaseItem
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+
+sealed class BaseItem : Parcelable
+
+@Parcelize
 data class Date(
     val dateNews: String
 ) : BaseItem()
-
+@Parcelize
 data class News(
     val author: String?,
     val title: String,

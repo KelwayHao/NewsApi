@@ -42,10 +42,10 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        val intentAmount = intent.getStringExtra("Android")
+        val intent = intent.getParcelableExtra<NewsInfo>("Android")
         textDisplayNumberOfResult.text =
-            "${getString(R.string.numbers_of_result, intentAmount)} "
-        
+            "${getString(R.string.numbers_of_result, intent?.amountNews)} "
+        intent?.listNews?.let { adapter.submitList(it) }
         searchNews()
         initView()
         initObserver()
