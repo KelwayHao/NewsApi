@@ -2,8 +2,12 @@ package com.example.retrofithomework.presentation
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
+import android.widget.ProgressBar
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import com.example.retrofithomework.R
+import com.example.retrofithomework.domain.models.NewsInfo
 import com.example.retrofithomework.presentation.recycler.BaseAdapter
 import com.example.retrofithomework.presentation.recycler.clicklisteners.OnItemClickListener
 import com.example.retrofithomework.presentation.viewmodel.NewsViewModel
@@ -38,6 +42,10 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
+        val intent = intent.getParcelableExtra<NewsInfo>("Android")
+        textDisplayNumberOfResult.text =
+            "${getString(R.string.numbers_of_result, intent?.amountNews)} "
+        intent?.listNews?.let { adapter.submitList(it) }
         searchNews()
         initView()
         initObserver()
@@ -46,6 +54,7 @@ class MainActivity : AppCompatActivity() {
     private fun searchNews() {
         searchBar.setOnQueryListener { stringQuery ->
             viewModel.setWord(stringQuery.toString())
+            circularProgressBar.visibility = ProgressBar.VISIBLE
             hideKeyboard(searchBar)
             return@setOnQueryListener true
         }
@@ -55,9 +64,9 @@ class MainActivity : AppCompatActivity() {
         recyclerDate.adapter = adapter
     }
 
-    @SuppressLint("SetTextI18n")
     private fun initObserver() {
         viewModel.news.observe(this) { listNews ->
+            circularProgressBar.visibility = ProgressBar.INVISIBLE
             textDisplayNumberOfResult.text =
                 "${getString(R.string.numbers_of_result, listNews.amountNews)} "
             adapter.submitList(listNews.listNews)

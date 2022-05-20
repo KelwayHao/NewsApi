@@ -2,6 +2,7 @@ package com.example.retrofithomework.data
 
 import com.example.retrofithomework.data.models.NewsResponse
 import com.example.retrofithomework.data.retrofit.RetrofitClient
+import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -33,7 +34,7 @@ interface NewsApi {
      */
 
     @GET("everything")
-    suspend fun getEverything(
+    fun getEverything(
         @Query("q") query: String?,
         @Query("apiKey") apiKey: String = RetrofitClient.BASE_API_KEY,
         @Query("domains") domains: String?,
@@ -42,5 +43,5 @@ interface NewsApi {
         @Query("page") pageNumber: Int = 1,
         @Query("pageSize") pageSize: Int = 20,
         @Query("sources") sources: String = "TechCrunch"
-    ): NewsResponse
+    ): Single<NewsResponse>
 }

@@ -3,6 +3,7 @@ package com.example.retrofithomework.utils.extensions
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
@@ -14,6 +15,8 @@ import com.example.retrofithomework.domain.models.BaseItem
 import com.example.retrofithomework.domain.models.Date
 import com.example.retrofithomework.domain.models.News
 import com.example.retrofithomework.domain.models.NewsInfo
+import io.reactivex.Observable
+import io.reactivex.Single
 
 fun List<ArticleResponse>.toBaseItems(): List<BaseItem> {
     val listBaseItem = mutableListOf<BaseItem>()
@@ -57,13 +60,6 @@ fun String.toDate(): String {
 fun Context.hideKeyboard(view: View) {
     val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
     inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
-}
-
-fun NewsResponse.toNewsInfo(): NewsInfo {
-    return NewsInfo(
-        this.totalResults.toString(),
-        this.article.toBaseItems()
-    )
 }
 
 fun ImageView.setImageByUrl(url: String) {
